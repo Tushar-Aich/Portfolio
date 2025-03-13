@@ -53,7 +53,6 @@ const Contact = () => {
         description: "Please fill out the message"
       })
     }
-    console.log(name, email, subject, message)
 
     const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/sendEmail`,
       { name, email, subject, message },
@@ -63,7 +62,7 @@ const Contact = () => {
         }
       }
     )
-    console.log(response)
+    
     // Simulate form submission
     setTimeout(() => {
       toast({
