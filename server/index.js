@@ -52,8 +52,8 @@ app.post('/api/v1/sendEmail', async (req, res) => {
             email,
             subject
         })
-
-        res.status(200).json(newData)
+        const newUser = await dataModel.findById(newData._id)
+        res.status(200).json(newUser)
     } catch (error) {
         console.log(error)
         res.status(500).json({error: error.message})
