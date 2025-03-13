@@ -47,10 +47,10 @@ app.post('/api/v1/sendEmail', async (req, res) => {
             throw new Error("Please fill all the fields")
         }
         const newData = await dataModel.create({
-            name,
-            message,
-            email,
-            subject
+            name: name,
+            message: message,
+            email: email,
+            subject: subject
         })
         const newUser = await dataModel.findById(newData._id)
         res.status(200).json(newUser)
