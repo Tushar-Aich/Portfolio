@@ -23,7 +23,7 @@ app.use(cookieParser());
 
 const connectDB = async () => {
     try {
-        const connectingDB = await mongoose.connect(process.env.MONGODB_URL);
+        const connectingDB = await mongoose.connect(`${process.env.MONGODB_URL}/Email`);
         console.log(`MongoDB connected successfully:: ${connectingDB.connection.host}`);
     } catch (error) {
         console.log(`MongoDB connection error in database folder:: ${error}`);
@@ -57,7 +57,7 @@ app.post('/api/v1/sendEmail', async (req, res) => {
     }
 })
 
-const port = process.env.PORT
+const port = process.env.PORT || 5000
 
 connectDB()
 .then(() => {
