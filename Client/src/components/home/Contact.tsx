@@ -55,7 +55,7 @@ const Contact = () => {
     }
     console.log(name, email, subject, message)
 
-    const response = await axios.post(import.meta.env.VITE_BACKEND_URL,
+    const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/Email`,
       { name, email, subject, message },
       {
         headers: {
