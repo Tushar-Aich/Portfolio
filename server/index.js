@@ -41,11 +41,11 @@ const dataSchema = new mongoose.Schema({
 const dataModel = mongoose.model("Data", dataSchema)
 
 app.post('/api/v1/sendEmail', async (req, res) => {
-    const { name, email, subject, message } = req.body
-    if([name, email, subject, message].some((value) => value?.trim() === "")){
-        throw new Error("Please fill all the fields")
-    }
     try {
+        const { name, email, subject, message } = req.body
+        if([name, email, subject, message].some((value) => value?.trim() === "")){
+            throw new Error("Please fill all the fields")
+        }
         const newData = await dataModel.create({
             name,
             message,
