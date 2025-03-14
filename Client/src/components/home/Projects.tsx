@@ -16,7 +16,7 @@ const projects = [
     title: "Portfolio Website",
     description: "My portfolio website showcases my experience in MERN stack and is built with React, Tailwind CSS, Radix UI, and Framer Motion",
     imgUrl: "/Portfolio.png",
-    link: "https://github.com/Tushar-Aich/Winglet",
+    link: "https://portfolio-2-phi-eight.vercel.app",
     tags: ["React", "Tailwind CSS", "Radix UI", "Frmer Motion", "Typescript"],
   },
 ];
