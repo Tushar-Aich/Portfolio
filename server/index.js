@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
+import { Resend } from 'resend';
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -21,24 +22,7 @@ app.use(express.static("public"));
 
 app.use(cookieParser());
 
-const connectDB = async () => {
-    try {
-        const connectingDB = await mongoose.connect(`${process.env.MONGODB_URL}/Email`);
-        console.log(`MongoDB connected successfully:: ${connectingDB.connection.host}`);
-    } catch (error) {
-        console.log(`MongoDB connection error in database folder:: ${error}`);
-        process.exit(1);
-    }
-}
-
-const dataSchema = new mongoose.Schema({
-    name: String,
-    message: String,
-    email: String,
-    subject: String
-})
-
-const dataModel = mongoose.model("Data", dataSchema)
+const resend = new Resend(process.env.RESEND_KEY)
 
 app.post('/api/v1/sendEmail', async (req, res) => {
     try {
@@ -46,14 +30,24 @@ app.post('/api/v1/sendEmail', async (req, res) => {
         if([name, email, subject, message].some((value) => value?.trim() === "")){
             throw new Error("Please fill all the fields")
         }
-        const newData = await dataModel.create({
-            name: name,
-            message: message,
-            email: email,
-            subject: subject
+
+        const res1 = await resend.emails.send({
+            from: "Portfolio <noreply@thewinglet.tech>",
+            to: "tusharaich106@gmail.com",
+            subject: subject,
+            html: `<p>I am ${name}, I have work for you : ${message}. You can contact me at ${email} </p>`
         })
-        const newUser = await dataModel.findById(newData._id)
-        res.status(200).json(newUser)
+        const res2 = await resend.emails.send({
+            from: "Portfolio <noreply@thewinglet.tech>",
+            to: email,
+            subject: "Email response | Portfolio",
+            html: `<p>Hello sir/madam, Thank you for reaching me. I have successfully received your email. I will reply back within 2 days. For further queries please reach out at 'tusharaich106@gmail.com'</p>`
+        })
+
+        console.log("Me : ", res1)
+        console.log("You : ", res2)
+
+        res.status(200).json({Me: res1, You: res2})
     } catch (error) {
         console.log(error)
         res.status(500).json({error: error.message})
@@ -62,14 +56,6 @@ app.post('/api/v1/sendEmail', async (req, res) => {
 
 const port = process.env.PORT || 5000
 
-connectDB()
-.then(() => {
-    app.listen(port, () => {
-        console.log(`Server is running on port ${port}`);
-    })
+app.listen(port, () => {
+   console.log(`Server is running on port ${port}`);
 })
-.catch((error) => {
-    console.log("Connection error while setting it up in index.js file", error);
-    process.exit(1);
-})
-
