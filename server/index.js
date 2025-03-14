@@ -32,13 +32,13 @@ app.post('/api/v1/sendEmail', async (req, res) => {
         }
 
         const res1 = await resend.emails.send({
-            from: "Portfolio <noreply@thewinglet.tech>",
-            to: "tusharaich106@gmail.com",
+            from: `Portfolio <${process.env.DOMAIN}>`,
+            to: process.env.EMAIL,
             subject: subject,
             html: `<p>I am ${name}, I have work for you : ${message}. You can contact me at ${email} </p>`
         })
         const res2 = await resend.emails.send({
-            from: "Portfolio <noreply@thewinglet.tech>",
+            from: `Portfolio <${process.env.DOMAIN}>`,
             to: email,
             subject: "Email response | Portfolio",
             html: `<p>Hello sir/madam, Thank you for reaching me. I have successfully received your email. I will reply back within 2 days. For further queries please reach out at 'tusharaich106@gmail.com'</p>`
