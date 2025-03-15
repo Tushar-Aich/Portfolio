@@ -7,7 +7,7 @@ import ProjectCard from "@/components/ui/ProjectCard";
 const projects = [
   {
     title: "Winglet",
-    description: "A full-stack social media platform insoired by X (formerly Twitter), built with modern web technology",
+    description: "A full-stack social media platform inspired by X (formerly Twitter), built with modern web technology. [Under development]",
     imgUrl: "/Winglet.png",
     link: "https://github.com/Tushar-Aich/Winglet",
     tags: ["React", "Node.js", "Tailwind CSS", "Express.js", "Mongo DB", "Shadcn UI", "Typescript"],
