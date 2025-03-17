@@ -85,7 +85,6 @@ const About = () => {
                   >
                     <div className="flex justify-between">
                       <span className="font-medium">{skill.name}</span>
-                      <span className="text-sm font-medium text-primary">{skill.level}%</span>
                     </div>
                     <div className="h-2.5 w-full overflow-hidden rounded-full bg-secondary">
                       <motion.div

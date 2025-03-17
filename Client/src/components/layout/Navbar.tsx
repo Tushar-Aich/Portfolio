@@ -37,7 +37,7 @@ const Navbar = () => {
       initial="hidden"
       animate="show"
       className={cn(
-        "fixed top-0 left-0 z-50 w-full transition-all duration-300 ease-out-expo",
+        "fixed top-0 left-0 z-20 w-full transition-all duration-300 ease-out-expo",
         isScrolled
           ? "bg-background/80 backdrop-blur-md border-b border-border shadow-sm py-4"
           : "bg-transparent py-6"
